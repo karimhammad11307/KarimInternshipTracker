@@ -12,9 +12,10 @@ This repository uses a hybrid structure to separate daily notes from codebase ex
 
 * `📁 /daily-logs` — My daily markdown entries detailing research, technical insights, and blockers.
 * `📁 /PuckTutorial` — Local React experiments testing Puck layouts, slots, and component configs.
+* * `📁 /PuckConfigTest` — Local Puck experiments testing layouts, config, and JSON.
 
 ## 📖 Latest Updates
-* [April 22: Visual Editor Research & Repo Setup](./daily-logs/23-4-2026.md)
+* [April 25: Visual Editor Research](./daily-logs/25-4-2026.md)
 
 ## 🛠️ Tech Stack Exploring
 * **Library:** React
