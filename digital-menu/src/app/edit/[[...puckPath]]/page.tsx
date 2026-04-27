@@ -5,7 +5,11 @@ import { config } from "../../../../puck.config";
 
 const initialData = {
     content: [],
-    root: {},
+    root: {
+        props: {
+            title: "My Digital Menu Draft"
+        }
+    },
 };
 
 //  Create a strongly typed selector hook outside the component to prevent re-renders
@@ -37,17 +41,12 @@ export default function EditorPage() {
         <Puck
             config={config}
             data={initialData}
-            onPublish={async (data) => {
-                console.log("Here is your pure JSON Representation:", data);
-                alert("Check your browser console (F12) to see the JSON data flow!");
-            }}
-            // We use Puck's native headerTitle for clean left-side branding
-            headerTitle="MASTERY IT - Menu Architect"
-            // We only override the headerActions to inject our button, 
-            // leaving Puck's beautifully designed default header intact!
+            // 1. Let the new CSS Variables handle the complete dark theme layout naturally!
+            // 2. We only override the headerActions to inject our deploy button
             overrides={{
-                headerActions: CustomHeaderActions
+                headerActions: CustomHeaderActions,
             }}
         />
+
     );
 }

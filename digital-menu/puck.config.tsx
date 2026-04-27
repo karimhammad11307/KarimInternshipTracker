@@ -1,10 +1,12 @@
 import type { Config } from "@puckeditor/core";
 import { Flame } from "lucide-react";
-import { DropZone } from "@puckeditor/core"; // Required for nested layouts
 
 // defining TS shape of our props avoiding editor crash
 type Props = {
-    TwoColumnGrid: {}; // holding drop zones
+    TwoColumnGrid: {
+        leftColumn: any[];
+        rightColumn: any[];
+    };
     CategoryHeading: {
         title: string;
         customNote?: string;
@@ -40,17 +42,26 @@ export const config: Config<Props> = {
         },
     },
     components: {
-        // multi column layout - DropZones
         TwoColumnGrid: {
-            render: () => (
+            // Modern API: Define "slots" as fields instead of rendering <DropZone /> components
+            fields: {
+                leftColumn: { type: "slot" },
+                rightColumn: { type: "slot" },
+            },
+            defaultProps: {
+                leftColumn: [],
+                rightColumn: [],
+            },
+            // The slot fields are passed in as renderable React components
+            render: ({ leftColumn: LeftColumn, rightColumn: RightColumn }) => (
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full my-6">
                     <div className="border-2 border-dashed border-gray-300 p-4 rounded bg-gray-50">
-                        {/* DropZone 1: Puck acts like React 'children' here */}
-                        <DropZone zone="left-column" />
+                        {/* Render the slot as a component! */}
+                        <LeftColumn />
                     </div>
                     <div className="border-2 border-dashed border-gray-300 p-4 rounded bg-gray-50">
-                        {/* DropZone 2: A separate isolated bucket for blocks */}
-                        <DropZone zone="right-column" />
+                        {/* Render the slot as a component! */}
+                        <RightColumn />
                     </div>
                 </div>
             ),

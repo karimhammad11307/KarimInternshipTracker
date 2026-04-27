@@ -1,1 +1,35 @@
 @import "tailwindcss";
+
+:root {
+  /* 
+    PUCK DARK THEME:
+    Puck is a light theme by default. To make it dark, we simply 
+    invert its core colors. By doing this, we don't have to rewrite 
+    any React components! 
+  */
+
+  /* 1. Main Backgrounds and Text */
+  --puck-color-white: #0f172a; /* Main background for sidebars, cards, inputs (slate-900) */
+  --puck-color-black: #f8fafc; /* Main text color (slate-50) */
+
+  /* 2. Inverting the Grayscale (Dark to Light) */
+  --puck-color-grey-12: #1e293b; /* Canvas Background (slate-800) */
+  --puck-color-grey-11: #0f172a; /* Outer canvas wrapper (slate-900) */
+  --puck-color-grey-10: #334155; /* Hover states & disabled backgrounds (slate-700) */
+  --puck-color-grey-09: #334155; /* Input borders and dividers (slate-700) */
+  --puck-color-grey-08: #475569; /* Stronger borders (slate-600) */
+  --puck-color-grey-07: #64748b; /* slate-500 */
+  --puck-color-grey-06: #94a3b8; /* slate-400 */
+  --puck-color-grey-05: #94a3b8; /* Subtitles and labels (slate-400) */
+  --puck-color-grey-04: #cbd5e1; /* slate-300 */
+  --puck-color-grey-03: #e2e8f0; /* slate-200 */
+  --puck-color-grey-02: #f1f5f9; /* slate-100 */
+  --puck-color-grey-01: #f8fafc; /* slate-50 */
+
+  /* 3. Primary Accents */
+  --puck-color-azure-05: #f97316; /* Change Puck's default blue focus rings to Orange! */
+
+  /* Force the application to use our new light text color instead of Tailwind's default black */
+  color: var(--puck-color-black);
+  color-scheme: dark;
+}
