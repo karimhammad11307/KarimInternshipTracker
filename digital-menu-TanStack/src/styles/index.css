@@ -1,0 +1,45 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Puck default light mode is already defined internally by Puck.
+       We don't need to manually define the light mode variables unless we want to change them. */
+  }
+  
+  .dark {
+    /* Full Inversion of Puck's Greyscale for a perfect Dark Theme */
+    --puck-color-grey-12: #0f172a; /* slate-900 (Main Backgrounds like sidebars) */
+    --puck-color-grey-11: #1e293b; /* slate-800 (Secondary Backgrounds like Canvas) */
+    --puck-color-grey-10: #334155; /* slate-700 (Hover/Tertiary Backgrounds) */
+    --puck-color-grey-09: #475569; /* slate-600 (Borders) */
+    --puck-color-grey-08: #64748b; /* slate-500 (Muted Borders/Icons) */
+    --puck-color-grey-07: #94a3b8; /* slate-400 */
+    --puck-color-grey-06: #cbd5e1; /* slate-300 */
+    --puck-color-grey-05: #e2e8f0; /* slate-200 (Labels/Subtitles) */
+    --puck-color-grey-04: #f1f5f9; /* slate-100 */
+    --puck-color-grey-03: #f8fafc; /* slate-50 */
+    --puck-color-grey-02: #ffffff; /* pure white */
+    --puck-color-grey-01: #ffffff; /* pure white (Primary Text) */
+    
+    /* Primary Accent (Azure/Blue) Inversion for Selections/Highlights */
+    --puck-color-azure-12: #020617; /* blue-950 equivalent (deepest) */
+    --puck-color-azure-11: #172554; /* blue-950 (Subtle hovers) */
+    --puck-color-azure-10: #1e3a8a; /* blue-900 (Selected item backgrounds) */
+    --puck-color-azure-09: #1e40af; /* blue-800 */
+    --puck-color-azure-08: #2563eb; /* blue-600 */
+    
+    /* Component Cards & Inputs */
+    --puck-color-white: #1e293b;   /* Component cards & Inputs background - slate-800 */
+    --puck-color-black: #f8fafc;   /* Main text - slate-50 */
+
+    /* Force the application to use our new light text color in dark mode */
+    color: var(--puck-color-black);
+    color-scheme: dark;
+  }
+  
+  body {
+    @apply bg-gray-50 text-gray-900 dark:bg-gray-900 transition-colors duration-200;
+  }
+}
