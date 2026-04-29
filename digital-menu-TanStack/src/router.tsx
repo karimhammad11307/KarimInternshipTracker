@@ -40,7 +40,7 @@ const editorRoute = createRoute({
 
 // 3. Build the route tree
 // We tell the router how the routes connect together.
-const routeTree = rootRoute.addChildren([indexRoute, menuRoute, editorRoute]);
+export const routeTree = rootRoute.addChildren([indexRoute, menuRoute, editorRoute]);
 
 // 4. Create the router instance
 export const router = createRouter({ routeTree });

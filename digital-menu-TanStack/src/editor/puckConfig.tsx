@@ -68,10 +68,10 @@ export const config: Config<PuckProps, RootProps> = {
       },
       render: ({ url, alt }) => (
         <div className="overflow-hidden rounded-2xl shadow-lg mb-8">
-          <img 
-            src={url} 
-            alt={alt} 
-            className="w-full h-64 object-cover hover:scale-105 transition-transform duration-500" 
+          <img
+            src={url}
+            alt={alt}
+            className="w-full h-64 object-cover hover:scale-105 transition-transform duration-500"
           />
         </div>
       ),
