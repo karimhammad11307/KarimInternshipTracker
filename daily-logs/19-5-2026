@@ -1,0 +1,43 @@
+# Daily Dev Log: May 19, 2026
+
+**Focus:** Object-Oriented Design Paradigms, Memory Allocation Strategies, and Trait Dispatches in Rust
+
+## Overview
+Today, I conducted an architectural deep dive into how Rust addresses core Object-Oriented Programming (OOP) principles. I explored how Rust completely replaces class-based inheritance with structural data containers (`struct`) and behavioral composition patterns (`trait`), allowing for completely safe, memory-efficient polymorphism without traditional runtime overhead.
+
+## Core Concepts & Technical Breakdown
+
+### 1. Paradigm Architecture: Is Rust OOP?
+*   **What Is OOP?** Traditional OOP relies on classes that encapsulate both state (data fields) and behavior (methods) into a single object blueprint, using inheritance chains to share code.
+*   **Rust Is Not OOP:** Rust rejects the traditional class model. It enforces a strict physical separation between **data** and **logic**, completely avoiding inheritance graphs to eliminate the classic "Fragile Base Class" problem.
+
+### 2. Implementing OOP Principles in Rust
+*   **Encapsulation with Methods:** Achieved by grouping fields inside a `struct` and writing separate behavior inside an implementation block (`impl`). 
+    *   Methods declare how they access state via explicit borrowing signatures: `&self` for read-only access, `&mut self` for exclusive write access, or `self` to consume ownership completely.
+*   **Abstraction with Selective Exposure:** Handled strictly via the module system. Fields and methods are fully private by default. Applying the `pub` keyword explicitly opens interfaces to outer modules, enabling developers to hide messy internal invariants.
+*   **Polymorphism with Traits:** Traits act as shared, zero-cost contracts (similar to TypeScript interfaces). They declare required method signatures that multiple, completely distinct structs can implement, allowing separate data shapes to satisfy the same behavioral interface.
+*   **Implemented Methods on Traits:** Traits can provide default concrete method implementations. Structs implementing the trait inherit this functionality for free but retain the ability to override it with specific logic.
+*   **Trait Inheritance:** Rust allows traits to build upon each other (e.g., `trait Derived: Base`). This establishes a dependency contract where a struct must fulfill the `Base` trait rules before it is legally allowed to implement the `Derived` trait.
+
+### 3. Dispatch & Memory Management under the Hood
+*   **Static vs. Dynamic Dispatch:** 
+    *   **Static Dispatch:** The compiler knows the exact type at compile time and hardcodes direct jumps to memory addresses. It is blisteringly fast with zero runtime cost.
+    *   **Dynamic Dispatch:** Used when the concrete type is unknown until runtime. The program leverages a Virtual Method Table (VTable) to dynamically resolve and look up function pointers at runtime, which introduces a minor performance cost ("pointer chasing").
+*   **Trait Objects (`&dyn Trait`):** The syntax used to represent an anonymous reference to any type that satisfies a given trait contract, explicitly alerting developers that dynamic dispatch is occurring.
+*   **Handling Unsized Data:** Because traits obscure the underlying concrete struct, their sizes are unknown (`!Sized`) at compile time. They cannot sit directly on the Stack. Rust handles this in two ways:
+    *   *Generics:* Creates static, fixed-size variations of code at compile time.
+    *   *Indirection:* Moves the variable-sized data behind a fixed-size pointer.
+*   **Box:** A smart pointer (`Box<T>`) used to achieve indirection. It allocates a fixed-size pointer on the Stack that points directly to the unsized, dynamic data stored on the Heap.
+
+### 4. Advanced Generic Architectures
+*   **Generic Functions & Monomorphization:** When writing generic functions like `fn execute<T: Trait>(item: T)`, Rust uses Monomorphization. It compiles a completely separate, hardcoded copy of the function for every distinct concrete type used, converting abstract polymorphism into raw, static assembly.
+*   **Generic Function Shorthand:** Explored the clean syntactic sugar pattern using `impl Trait` directly within arguments (e.g., `fn execute(item: &impl Trait)`), which makes generic trait bounds significantly cleaner to read.
+*   **Generic Structs Revisited:** Mapped out how structs can hold generic type placeholders constrained by trait bounds, allowing for highly reusable data architectures that still calculate their physical memory layouts precisely at compile time.
+
+## Key Architectural Takeaways
+*   **Zero-Cost Abstractions:** By favoring generics and static dispatch by default, our backend services achieve high levels of code reusability without sacrificing execution speed.
+*   **Unbreakable State Security:** By enforcing encapsulated constructor patterns (`Type::new()`) and strict default module privacy, it is mathematically impossible for invalid state models or unhashed payloads to bypass validation steps.
+
+## Educational Resources & Media Links
+*   **Tour of Rust (Chapter 7 & Trait Architectures):** https://tourofrust.com/
+*   **Edsger W. Dijkstra Article on OOP :** https://dpc.pw/posts/the-faster-you-unlearn-oop-the-better-for-you-and-your-software
