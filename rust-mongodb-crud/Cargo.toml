@@ -4,16 +4,7 @@ version = "0.1.0"
 edition = "2024"
 
 [dependencies]
-# The official MongoDB driver for Rust (v3.7.0)
 mongodb = "3.7.0"
-
-# Tokio is our asynchronous runtime, which handles event looping, thread scheduling, and non-blocking I/O.
-# We enable the "full" feature set to get access to multi-threaded execution, timers, and filesystem resources.
 tokio = { version = "1.43.0", features = ["full"] }
-
-# Serde is the serialization/deserialization framework. 
-# The "derive" feature allows us to use compiler macros like #[derive(Serialize, Deserialize)] on our structs.
 serde = { version = "1.0.217", features = ["derive"] }
-
-# futures-util provides auxiliary utilities for dealing with async Streams (like iterating over database cursor results).
 futures-util = "0.3.31"
